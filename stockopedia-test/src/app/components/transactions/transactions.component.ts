@@ -13,6 +13,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
     title = 'stockopedia-test';
 
     private _destroy$: Subject<any>;
+    // private _refresh
     public cumulativeCashflow: number;
 
     public transactions$: Observable<TransactionModel[]>;
@@ -30,7 +31,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this._destroy$.next();
+        // this._destroy$.next();
     }
 
 }
