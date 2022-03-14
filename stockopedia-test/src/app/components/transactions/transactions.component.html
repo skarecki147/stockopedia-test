@@ -1,0 +1,76 @@
+<div class="card mt-4">
+  <div class="card-body">
+    <div class="alert alert-success" role="alert">Transaction added!</div>
+    <div class="alert alert-primary" role="alert">Transaction updated!</div>
+    <div class="alert alert-danger" role="alert">Transaction deleted!</div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Date</th>
+          <th scope="col">Type</th>
+          <th scope="col">Security</th>
+          <th scope="col" class="text-right">Shares</th>
+          <th scope="col" class="text-right">Value</th>
+          <th scope="col" class="text-right">Cashflow</th>
+          <th scope="col" class="text-right">&nbsp;</th>
+          <th scope="col" class="text-right">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaction of transactions$ | async; index as i">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{ transaction.date | date:'shortDate' }}</td>
+          <td>{{ transaction.type }}</td>
+          <td><span class="text-muted"> {{transaction.security}} </span></td>
+          <td class="text-right"><span class="text-muted">{{transaction.shares}}</span></td>
+          <td class="text-right">&pound;{{transaction.value}}</td>
+          <td class="text-right text-success">+&pound;{{transaction.cashflow}}</td>
+          <td class="text-right"><a href="#">Edit</a></td>
+          <td class="text-right"><a href="#">Delete</a></td>
+        </tr>
+        <!-- <tr>
+            <th scope="row">2</th>
+            <td>15/06/2019</td>
+            <td>Buy</td>
+            <td>Gulf Keystone Petroleum</td>
+            <td class="text-right">118</td>
+            <td class="text-right">&pound;1,200</td>
+            <td class="text-right text-danger">-&pound;1,200</td>
+            <td class="text-right"><a href="#">Edit</a></td>
+            <td class="text-right"><a href="#">Delete</a></td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>01/11/2019</td>
+            <td>Sell</td>
+            <td>Gulf Keystone Petroleum</td>
+            <td class="text-right">34</td>
+            <td class="text-right">&pound;720</td>
+            <td class="text-right text-success">+&pound;720</td>
+            <td class="text-right"><a href="#">Edit</a></td>
+            <td class="text-right"><a href="#">Delete</a></td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td>05/01/2020</td>
+            <td>Withdraw</td>
+            <td><span class="text-muted">n/a</span></td>
+            <td class="text-right"><span class="text-muted">n/a</span></td>
+            <td class="text-right">&pound;1,000</td>
+            <td class="text-right text-danger">-&pound;1,000</td>
+            <td class="text-right"><a href="#">Edit</a></td>
+            <td class="text-right"><a href="#">Delete</a></td>
+          </tr> -->
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6">Cumulative cashflow</td>
+          <td class="text-right">&pound;{{cumulativeCashflow}}</td>
+          <td colspan="2">&nbsp;</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
