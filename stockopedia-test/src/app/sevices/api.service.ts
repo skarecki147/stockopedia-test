@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TransactionModel } from "../shared/models/transaction.model";
 import { Observable } from "rxjs";
 
@@ -9,6 +9,9 @@ export class ApiService {
 
     constructor(private _http: HttpClient) {
         this._baseUrl = 'https://transactions-challenge.test.stockopedia.com//api/v1';
+
+        this._http.options(this._baseUrl, { headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    })
     }
 
     public getTransactions(): Observable<{ transactions: TransactionModel[] }> {
