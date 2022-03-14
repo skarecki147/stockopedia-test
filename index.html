@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Stockopedia front-end developer coding challenge</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+    <body>
+        <div class="container">
+            <div class="card mt-4">
+                <div class="card-body">
+                    <div class="alert alert-success" role="alert">Transaction added!</div>
+                    <div class="alert alert-primary" role="alert">Transaction updated!</div>
+                    <div class="alert alert-danger" role="alert">Transaction deleted!</div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Security</th>
+                                <th scope="col" class="text-right">Shares</th>
+                                <th scope="col" class="text-right">Value</th>
+                                <th scope="col" class="text-right">Cashflow</th>
+                                <th scope="col" class="text-right">&nbsp;</th>
+                                <th scope="col" class="text-right">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>12/06/2019</td>
+                                <td>Deposit</td>
+                                <td><span class="text-muted">n/a</span></td>
+                                <td class="text-right"><span class="text-muted">n/a</span></td>
+                                <td class="text-right">&pound;5,000</td>
+                                <td class="text-right text-success">+&pound;5,000</td>
+                                <td class="text-right"><a href="#">Edit</a></td>
+                                <td class="text-right"><a href="#">Delete</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>15/06/2019</td>
+                                <td>Buy</td>
+                                <td>Gulf Keystone Petroleum</td>
+                                <td class="text-right">118</td>
+                                <td class="text-right">&pound;1,200</td>
+                                <td class="text-right text-danger">-&pound;1,200</td>
+                                <td class="text-right"><a href="#">Edit</a></td>
+                                <td class="text-right"><a href="#">Delete</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>01/11/2019</td>
+                                <td>Sell</td>
+                                <td>Gulf Keystone Petroleum</td>
+                                <td class="text-right">34</td>
+                                <td class="text-right">&pound;720</td>
+                                <td class="text-right text-success">+&pound;720</td>
+                                <td class="text-right"><a href="#">Edit</a></td>
+                                <td class="text-right"><a href="#">Delete</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>05/01/2020</td>
+                                <td>Withdraw</td>
+                                <td><span class="text-muted">n/a</span></td>
+                                <td class="text-right"><span class="text-muted">n/a</span></td>
+                                <td class="text-right">&pound;1,000</td>
+                                <td class="text-right text-danger">-&pound;1,000</td>
+                                <td class="text-right"><a href="#">Edit</a></td>
+                                <td class="text-right"><a href="#">Delete</a></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6">Cumulative cashflow</td>
+                                <td class="text-right">&pound;3,520</td>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h3>Add transaction</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" class="form-control" id="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <select id="type" class="form-control">
+                                <option disabled selected>Please select...</option>
+                                <option>Deposit</option>
+                                <option>Withdraw</option>
+                                <option>Buy</option>
+                                <option>Sell</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="security">Security</label>
+                            <input type="text" class="form-control" id="security">
+                        </div>
+                        <div class="form-group">
+                            <label for="shares">Shares</label>
+                            <input type="number" class="form-control" id="shares">
+                        </div>
+                        <div class="form-group">
+                            <label for="value">Value</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">&pound;</span>
+                                </div>
+                                <input type="number" class="form-control" id="value">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add transaction</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
