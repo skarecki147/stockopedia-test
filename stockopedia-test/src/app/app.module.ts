@@ -9,6 +9,8 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { NewTransactionComponent } from './components/new-transaction/new-transaction.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CurrencyWithSign } from './shared/pipes/currency-with-sign.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { CurrencyWithSign } from './shared/pipes/currency-with-sign.pipe';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [ApiService, TransactionService],
   bootstrap: [AppComponent]

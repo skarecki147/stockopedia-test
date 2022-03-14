@@ -9,9 +9,6 @@ export class ApiService {
 
     constructor(private _http: HttpClient) {
         this._baseUrl = 'https://transactions-challenge.test.stockopedia.com//api/v1';
-
-        this._http.options(this._baseUrl, { headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    })
     }
 
     public getTransactions(): Observable<{ transactions: TransactionModel[] }> {
@@ -19,11 +16,17 @@ export class ApiService {
     }
 
     public createTransaction(transaction: any): Observable<TransactionModel> {
-        return this._http.post<TransactionModel>(`${this._baseUrl}/transactions`, transaction);
+        return this._http.post<TransactionModel>(
+            `${this._baseUrl}/transactions`, 
+            transaction, 
+            { headers: new HttpHeaders({ 'Content-Type': 'application/json' })});
     }
 
     public updateTransaction(transaction: TransactionModel): Observable<TransactionModel> {
-        return this._http.put<TransactionModel>(`${this._baseUrl}/transactions/${transaction.id}`, transaction);
+        return this._http.put<TransactionModel>(
+            `${this._baseUrl}/transactions/${transaction.id}`, 
+            transaction,
+            { headers: new HttpHeaders({ 'Content-Type': 'application/json' })});
     }
 
     public deleteTransaction(transactionId: number): Observable<TransactionModel> {

@@ -1,9 +1,9 @@
 <div class="card mt-4">
   <div class="card-body">
-    <div class="alert alert-success" role="alert">Transaction added!</div>
-    <div class="alert alert-primary" role="alert">Transaction updated!</div>
-    <div class="alert alert-danger" role="alert">Transaction deleted!</div>
-
+    <div class="alert" *ngIf="transactionStatus !== transactionStatusEnum.START" [ngClass]="{
+        'alert-success' : transactionStatus === transactionStatusEnum.ADDED,
+        'alert-primary' : transactionStatus === transactionStatusEnum.UPDATED,
+        'alert-danger' : transactionStatus === transactionStatusEnum.DELETED}" role="alert">{{transactionStatus}}</div>
     <table class="table">
       <thead>
         <tr>
@@ -23,16 +23,16 @@
           <th scope="row">{{i + 1}}</th>
           <td>{{ transaction.date | date:'dd/MM/yyyy' }}</td>
           <td>{{ transaction.type }}</td>
-          <td>{{transaction.security}}<span class="text-muted" *ngIf="!transaction.security">n/a</span></td>
+          <td>{{ transaction.security }}<span class="text-muted" *ngIf="!transaction.security">n/a</span></td>
           <td class="text-right">{{transaction.shares}}
-              <span class="text-muted" *ngIf="!transaction.shares">n/a</span></td>
+            <span class="text-muted" *ngIf="!transaction.shares">n/a</span>
+          </td>
           <td class="text-right">&pound;{{transaction.value}}</td>
-          <td class="text-right text-success" 
-            [ngClass]="{'text-success' : transaction.cashflow > 0,
+          <td class="text-right text-success" [ngClass]="{'text-success' : transaction.cashflow > 0,
                         'text-danger': transaction.cashflow < 0 }">
-                        {{transaction.cashflow | currencyWithSign:'GBP':'symbol-narrow':'1.0-0'}}</td>
-          <td class="text-right"><a href="#">Edit</a></td>
-          <td class="text-right"><a href="#">Delete</a></td>
+            {{transaction.cashflow | currencyWithSign:'GBP':'symbol-narrow':'1.0-0'}}</td>
+          <td class="text-right"><a href="#" (click)="editTransaction(transaction.id)">Edit</a></td>
+          <td class="text-right"><a href="#" (click)="deleteTransaction(transaction.id)">Delete</a></td>
         </tr>
         <!-- <tr>
             <th scope="row">2</th>
@@ -71,7 +71,7 @@
       <tfoot>
         <tr>
           <td colspan="6">Cumulative cashflow</td>
-          <td class="text-right">&pound;{{cumulativeCashflow}}</td>
+          <td class="text-right">{{cumulativeCashflow | currency:'GBP':'symbol-narrow':'1.0-0'}}</td>
           <td colspan="2">&nbsp;</td>
         </tr>
       </tfoot>
