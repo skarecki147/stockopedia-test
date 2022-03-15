@@ -5,7 +5,7 @@ export interface TransactionModel {
   type: TransactionTypeEnum,
   date:  string,
   value: number
-  cashflow: number,
+  cashflow?: number,
   security?: string,
   shares?: number,
 }

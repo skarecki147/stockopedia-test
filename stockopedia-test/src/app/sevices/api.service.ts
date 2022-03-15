@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TransactionModel } from "../shared/models/transaction.model";
+import { TransactionService } from 'src/app/sevices/transactions.service';
+
 import { Observable } from "rxjs";
 
 @Injectable()
 export class ApiService {
     private _baseUrl: string;
 
-    constructor(private _http: HttpClient) {
+    constructor(private _http: HttpClient, private _transactionService: TransactionService) {
         this._baseUrl = 'https://transactions-challenge.test.stockopedia.com//api/v1';
     }
 

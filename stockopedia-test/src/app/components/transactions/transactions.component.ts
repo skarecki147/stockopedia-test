@@ -42,14 +42,14 @@ export class TransactionsComponent implements OnInit, OnDestroy, AfterViewInit {
         this._destroy$.next();
     }
 
-    public editTransaction(id: number): void {
-        this.transactionStatus = TransactionStatusEnum.UPDATED;
-        // this._transactionService.editTransaction(id);
+    public editTransaction(transaction: TransactionModel): void {
+        // this.transactionStatus = TransactionStatusEnum.UPDATED;
+        this._transactionService.editTransaction(transaction);
     }
 
     public deleteTransaction(id: number): void {
-        this.transactionStatus = TransactionStatusEnum.DELETED;
-        // this._transactionService.deleteTransaction(id);
+        // this.transactionStatus = TransactionStatusEnum.DELETED;
+        this._transactionService.deleteTransaction(id);
     }
 
 }

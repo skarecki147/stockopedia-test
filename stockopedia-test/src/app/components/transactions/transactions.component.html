@@ -31,7 +31,7 @@
           <td class="text-right text-success" [ngClass]="{'text-success' : transaction.cashflow > 0,
                         'text-danger': transaction.cashflow < 0 }">
             {{transaction.cashflow | currencyWithSign:'GBP':'symbol-narrow':'1.0-0'}}</td>
-          <td class="text-right"><a href="#" (click)="editTransaction(transaction.id)">Edit</a></td>
+          <td class="text-right"><a href="#" (click)="editTransaction(transaction)">Edit</a></td>
           <td class="text-right"><a href="#" (click)="deleteTransaction(transaction.id)">Delete</a></td>
         </tr>
         <!-- <tr>

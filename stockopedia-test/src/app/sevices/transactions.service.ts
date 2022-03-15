@@ -11,12 +11,14 @@ export class TransactionService {
     public transactions$: Observable<TransactionModel[]>;
 
     public status$: BehaviorSubject<TransactionStatusEnum>;
+    public isEditingState$: BehaviorSubject<boolean>;
 
     private _refresh$: Subject<void>;
 
     constructor(private _api: ApiService) {
         this._refresh$ = new Subject();
         this.status$ = new BehaviorSubject(TransactionStatusEnum.START);
+        this.isEditingState$ = new BehaviorSubject(false);
 
         this.transactions$ = this._refresh$.asObservable().pipe(
             concatMap(_ => this._api.getTransactions().pipe(
@@ -31,14 +33,18 @@ export class TransactionService {
 
     public addTransaction(transaction: TransactionModel): void {
         this._api.createTransaction(transaction).subscribe(_ => this._refresh$.next());
+        this.status$.next(TransactionStatusEnum.ADDED)
     }
 
     public editTransaction(transaction: TransactionModel): void {
+        this.isEditingState$.next(true);
         this._api.updateTransaction(transaction).subscribe(_ => this._refresh$.next());
+        this.status$.next(TransactionStatusEnum.UPDATED)
     }
 
     public deleteTransaction(transactionId: number): void {
         this._api.deleteTransaction(transactionId).subscribe(_ => this._refresh$.next());
+        this.status$.next(TransactionStatusEnum.DELETED)
     }
 
 }
