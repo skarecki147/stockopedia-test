@@ -33,27 +33,26 @@ export class NewTransactionComponent implements OnInit {
         this._transactionService.editingTransaction$.subscribe((transaction) => {
             if (transaction) {
                 this.currentTransactionID = transaction.id;
-                this.newTransactionForm.patchValue(transaction);
+                this.newTransactionForm.patchValue({ ...transaction, date: new Date(transaction.date).toISOString().slice(0, 10) });
             }
-
         })
     }
 
     onSubmit(submittedTransaction: TransactionModel) {
-        submittedTransaction.cashflow = submittedTransaction.type === ('buy' || 'withdraw') ? submittedTransaction.value : -submittedTransaction.value;
+        submittedTransaction.cashflow = ['buy', 'withdraw'].includes(submittedTransaction.type) ? submittedTransaction.value : -submittedTransaction.value;
         submittedTransaction.id = this.currentTransactionID;
+        submittedTransaction.value = +(submittedTransaction.value * 100).toFixed(2)
+        submittedTransaction.cashflow = +(submittedTransaction.cashflow * 100).toFixed(2)
         if (this.editing) {
             this._transactionService.updateTransaction(submittedTransaction);
         } else {
             this._transactionService.addTransaction(submittedTransaction);
-
         }
         this.newTransactionForm.reset();
     }
 
     cancelEditing(): void {
         this._transactionService.isEditingState$.next(false);
-        // this._transactionService.editingTransaction$.next(null);
         this.newTransactionForm.reset();
     }
 }

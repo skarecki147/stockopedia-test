@@ -24,7 +24,11 @@ export class TransactionService {
 
         this.transactions$ = this._refresh$.asObservable().pipe(
             concatMap(_ => this._api.getTransactions().pipe(
-                map(res => res.transactions)
+                map(res => res.transactions.map(el => {
+                    el.value /= 100;
+                    el.cashflow /= 100;
+                    return el;
+                })),
             ))
         )
     }
