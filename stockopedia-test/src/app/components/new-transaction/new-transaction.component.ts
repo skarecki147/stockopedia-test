@@ -28,7 +28,7 @@ export class NewTransactionComponent implements OnInit {
     constructor(private _transactionService: TransactionService) { }
 
     ngOnInit(): void {
-
+        this._transactionService.editingTransaction$.subscribe((transaction) => console.log(transaction))
     }
 
     onSubmit(submittedTransaction: TransactionModel) {

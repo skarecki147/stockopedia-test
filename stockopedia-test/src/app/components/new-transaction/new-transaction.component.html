@@ -31,7 +31,8 @@
           <input type="number" class="form-control" id="value" formControlName="value">
         </div>
       </div>
-      <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Add transaction</button>
+      <button type="submit" class="btn btn-primary" style="margin-top: 20px;">{{ editing === true ? 'Update transaction'
+        : 'Add transaction' }}</button>
     </form>
   </div>
 </div>

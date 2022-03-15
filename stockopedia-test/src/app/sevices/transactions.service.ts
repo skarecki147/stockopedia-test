@@ -9,6 +9,7 @@ import { TransactionStatusEnum } from "../shared/models/transaction-status.enum"
 @Injectable()
 export class TransactionService {
     public transactions$: Observable<TransactionModel[]>;
+    public editingTransaction$: Subject<TransactionModel>;
 
     public status$: BehaviorSubject<TransactionStatusEnum>;
     public isEditingState$: BehaviorSubject<boolean>;
@@ -17,8 +18,10 @@ export class TransactionService {
 
     constructor(private _api: ApiService) {
         this._refresh$ = new Subject();
+        this.editingTransaction$ = new Subject();
         this.status$ = new BehaviorSubject(TransactionStatusEnum.START);
         this.isEditingState$ = new BehaviorSubject(false);
+        
 
         this.transactions$ = this._refresh$.asObservable().pipe(
             concatMap(_ => this._api.getTransactions().pipe(
@@ -38,6 +41,7 @@ export class TransactionService {
 
     public editTransaction(transaction: TransactionModel): void {
         this.isEditingState$.next(true);
+        this.editingTransaction$.next(transaction);
         this._api.updateTransaction(transaction).subscribe(_ => this._refresh$.next());
         this.status$.next(TransactionStatusEnum.UPDATED)
     }
