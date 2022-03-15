@@ -1,11 +1,10 @@
-import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
-import { TransactionModel } from 'src/app/shared/models/transaction.model';
-import { ApiService } from 'src/app/sevices/api.service';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { map, tap, combineLatest, takeUntil } from 'rxjs/operators';
-import { CurrencyWithSign } from 'src/app/shared/pipes/currency-with-sign.pipe';
+import { takeUntil, tap } from 'rxjs/operators';
 import { TransactionService } from 'src/app/sevices/transactions.service';
 import { TransactionStatusEnum } from 'src/app/shared/models/transaction-status.enum';
+import { TransactionModel } from 'src/app/shared/models/transaction.model';
+import { CurrencyWithSign } from 'src/app/shared/pipes/currency-with-sign.pipe';
 
 @Component({
   selector: 'app-transactions',
@@ -22,7 +21,7 @@ export class TransactionsComponent implements OnInit, OnDestroy, AfterViewInit {
   public transactionStatus: TransactionStatusEnum;
   public transactionStatusEnum = TransactionStatusEnum;
 
-  constructor(private _api: ApiService, private _transactionService: TransactionService) {
+  constructor(private _transactionService: TransactionService) {
     this._destroy$ = new Subject();
 
     this.transactions$ = this._transactionService.transactions$.pipe(

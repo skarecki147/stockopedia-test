@@ -1,15 +1,14 @@
-import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TransactionModel } from "../shared/models/transaction.model";
-import { TransactionService } from 'src/app/sevices/transactions.service';
-
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { TransactionModel } from "../shared/models/transaction.model";
+
 
 @Injectable()
 export class ApiService {
     private _baseUrl: string;
 
-    constructor(private _http: HttpClient, private _transactionService: TransactionService) {
+    constructor(private _http: HttpClient) {
         this._baseUrl = 'https://transactions-challenge.test.stockopedia.com//api/v1';
     }
 
@@ -19,16 +18,16 @@ export class ApiService {
 
     public createTransaction(transaction: any): Observable<TransactionModel> {
         return this._http.post<TransactionModel>(
-            `${this._baseUrl}/transactions`, 
-            transaction, 
-            { headers: new HttpHeaders({ 'Content-Type': 'application/json' })});
+            `${this._baseUrl}/transactions`,
+            transaction,
+            { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
     }
 
     public updateTransaction(transaction: TransactionModel): Observable<TransactionModel> {
         return this._http.put<TransactionModel>(
-            `${this._baseUrl}/transactions/${transaction.id}`, 
+            `${this._baseUrl}/transactions/${transaction.id}`,
             transaction,
-            { headers: new HttpHeaders({ 'Content-Type': 'application/json' })});
+            { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
     }
 
     public deleteTransaction(transactionId: number): Observable<TransactionModel> {

@@ -1,6 +1,7 @@
 <div class="card mt-4">
   <div class="card-body">
-    <h3>Add transaction</h3>
+    <h3>{{ editing === true ? 'Edit transaction ' + '(#' + currentTransactionID + ')'
+      : 'Add transaction' }}</h3>
     <form [formGroup]="newTransactionForm" (ngSubmit)="onSubmit(newTransactionForm.value)">
       <div class="form-group">
         <label for="date">Date</label>
@@ -33,6 +34,9 @@
       </div>
       <button type="submit" class="btn btn-primary" style="margin-top: 20px;">{{ editing === true ? 'Update transaction'
         : 'Add transaction' }}</button>
+
+      <button type="button" [hidden]="!editing" class="btn btn-secondary" style="margin-top: 20px; margin-left: 10px;"
+        (click)="cancelEditing()">Cancel</button>
     </form>
   </div>
 </div>

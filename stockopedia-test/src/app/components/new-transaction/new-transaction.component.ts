@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { TransactionTypeEnum } from 'src/app/shared/models/transaction-type.enum';
+import { FormControl, FormGroup } from '@angular/forms';
 import { TransactionService } from 'src/app/sevices/transactions.service';
+import { TransactionTypeEnum } from 'src/app/shared/models/transaction-type.enum';
 import { TransactionModel } from 'src/app/shared/models/transaction.model';
 
 
@@ -14,6 +14,7 @@ export class NewTransactionComponent implements OnInit {
 
     title = 'stockopedia-test';
     editing = false;
+    currentTransactionID: number;
     public transactionTypeEnum = TransactionTypeEnum;
     newTransactionForm = new FormGroup({
         value: new FormControl(),
@@ -28,12 +29,31 @@ export class NewTransactionComponent implements OnInit {
     constructor(private _transactionService: TransactionService) { }
 
     ngOnInit(): void {
-        this._transactionService.editingTransaction$.subscribe((transaction) => console.log(transaction))
+        this._transactionService.isEditingState$.subscribe(state => this.editing = state)
+        this._transactionService.editingTransaction$.subscribe((transaction) => {
+            if (transaction) {
+                this.currentTransactionID = transaction.id;
+                this.newTransactionForm.patchValue(transaction);
+            }
+
+        })
     }
 
     onSubmit(submittedTransaction: TransactionModel) {
         submittedTransaction.cashflow = submittedTransaction.type === ('buy' || 'withdraw') ? submittedTransaction.value : -submittedTransaction.value;
-        this._transactionService.addTransaction(submittedTransaction);
+        submittedTransaction.id = this.currentTransactionID;
+        if (this.editing) {
+            this._transactionService.updateTransaction(submittedTransaction);
+        } else {
+            this._transactionService.addTransaction(submittedTransaction);
+
+        }
+        this.newTransactionForm.reset();
+    }
+
+    cancelEditing(): void {
+        this._transactionService.isEditingState$.next(false);
+        // this._transactionService.editingTransaction$.next(null);
         this.newTransactionForm.reset();
     }
 }
