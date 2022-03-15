@@ -1,15 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NewTransactionComponent } from './components/new-transaction/new-transaction.component';
+import { TransactionsComponent } from './components/transactions/transactions.component';
 import { ApiService } from './sevices/api.service';
 import { TransactionService } from './sevices/transactions.service';
-import { TransactionsComponent } from './components/transactions/transactions.component';
-import { NewTransactionComponent } from './components/new-transaction/new-transaction.component';
-import { HttpClientModule } from '@angular/common/http';
 import { CurrencyWithSign } from './shared/pipes/currency-with-sign.pipe';
-import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({

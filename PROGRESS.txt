@@ -1,0 +1,26 @@
+PROGRESS / STEPS TAKEN:
+
+- create project repository on git
+- install angular 13
+- add bootstrap package version 4.5.0
+- copy html body to app.component
+- create api.service
+- set base url
+- create 4 endpoints (get, create, update, delete transaction)
+- split view into components: transactions, new-transaction
+- add error.handler.ts
+- add transaction.model
+- create getTransaction functionality
+- refresh transaction data
+- create transaction form with input fields
+- add edit functionality
+- load edited transation to the form with subscription
+- submit transaction with POST for new transaction and PUT for update
+- fix for date formatting inside newTransactionForm
+- fix for currency - display as pounds, send as pence values
+- setup jest
+- add simple jest tests templates to start with
+
+
+// to run the project please download repository and run 'npm install', 'ng serve'
+// to run tests please run 'ng test'

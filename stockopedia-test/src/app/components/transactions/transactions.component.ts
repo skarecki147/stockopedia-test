@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
-import { TransactionService } from 'src/app/sevices/transactions.service';
-import { TransactionStatusEnum } from 'src/app/shared/models/transaction-status.enum';
-import { TransactionModel } from 'src/app/shared/models/transaction.model';
-import { CurrencyWithSign } from 'src/app/shared/pipes/currency-with-sign.pipe';
+import { TransactionService } from '../../sevices/transactions.service';
+import { TransactionStatusEnum } from '../../shared/models/transaction-status.enum';
+import { TransactionModel } from '../../shared/models/transaction.model';
+import { CurrencyWithSign } from '../../shared/pipes/currency-with-sign.pipe';
 
 @Component({
   selector: 'app-transactions',

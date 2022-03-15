@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { TransactionService } from 'src/app/sevices/transactions.service';
-import { TransactionTypeEnum } from 'src/app/shared/models/transaction-type.enum';
-import { TransactionModel } from 'src/app/shared/models/transaction.model';
+import { TransactionService } from '../../sevices/transactions.service';
+import { TransactionTypeEnum } from '../../shared/models/transaction-type.enum';
+import { TransactionModel } from '../../shared/models/transaction.model';
 
 
 @Component({
@@ -43,6 +43,7 @@ export class NewTransactionComponent implements OnInit {
         submittedTransaction.id = this.currentTransactionID;
         submittedTransaction.value = +(submittedTransaction.value * 100).toFixed(2)
         submittedTransaction.cashflow = +(submittedTransaction.cashflow * 100).toFixed(2)
+        submittedTransaction.date = new Date(submittedTransaction.date).toISOString()
         if (this.editing) {
             this._transactionService.updateTransaction(submittedTransaction);
         } else {
